@@ -12,6 +12,12 @@ from django.http import JsonResponse
 def index(request):
     return HttpResponse("hello\r\n")
 
+def switch_on(request):
+    
+
+def switch_off(request):
+
+
 def sensor(request):
     if request.method == 'POST':
         content = json.loads(request.body.decode())
