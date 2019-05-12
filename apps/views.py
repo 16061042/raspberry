@@ -13,10 +13,23 @@ def index(request):
     return HttpResponse("hello\r\n")
 
 def switch_on(request):
-    
-
+    if(models.Switch.objects.all() == None):
+        obj = models.Switch(switch=True)
+        obj.save()
+    else:
+        obj = models.Switch.objects.get(id = 0)
+        obj.switch = True
+        obj.save()
+    print(models.Switch.objects.all())
 def switch_off(request):
-
+    if (models.Switch.objects.all() == None):
+        obj = models.Switch(switch=False)
+        obj.save()
+    else:
+        obj = models.Switch.objects.get(id=0)
+        obj.switch = False
+        obj.save()
+    print(models.Switch.objects.all())
 
 def sensor(request):
     if request.method == 'POST':
@@ -31,6 +44,4 @@ def alarm(request):
         print(request.POST)
         print(request.body)
         print(request.body.decode())
-        #content = json.loads(request.body.decode())
-        #print(content)
     return HttpResponse("success")
