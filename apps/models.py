@@ -49,3 +49,12 @@ class Switch(models.Model):
     class Meta:
         verbose_name = "开关表"
         verbose_name_plural = verbose_name
+class Info(models.Model):
+    temperature = models.FloatField(verbose_name="温度")
+    humidity = models.FloatField(verbose_name="湿度")
+    occupancy = models.BooleanField(verbose_name="人体")
+    smoke = models.BooleanField(verbose_name="烟")
+    class Meta:
+        verbose_name = "开关表"
+        verbose_name_plural = verbose_name
+

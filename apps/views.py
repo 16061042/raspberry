@@ -13,23 +13,24 @@ def index(request):
     return HttpResponse("hello\r\n")
 
 def switch_on(request):
-    if(models.Switch.objects.all() == None):
-        obj = models.Switch(switch=True)
-        obj.save()
-    else:
-        obj = models.Switch.objects.get(id = 0)
-        obj.switch = True
-        obj.save()
-    print(models.Switch.objects.all())
+    obj = models.Switch.objects.first()
+    if(obj == None):
+        obj = models.Switch.objects.create()
+    obj.switch = True
+    obj.save()
+    return HttpResponse("success")
+
 def switch_off(request):
-    if (models.Switch.objects.all() == None):
-        obj = models.Switch(switch=False)
-        obj.save()
-    else:
-        obj = models.Switch.objects.get(id=0)
-        obj.switch = False
-        obj.save()
-    print(models.Switch.objects.all())
+    obj = models.Switch.objects.first()
+    if(obj == None):
+        obj = models.Switch.objects.create()
+    obj.switch = False
+    obj.save()
+    return HttpResponse("success")
+
+def sensor_db(request):
+    obj = models.Info.objects.first()
+    return JsonResponse({"temperature":obj.temperature,"humidity":obj.humidity,"occupancy":obj.occupancy,"smoke":obj.smoke})
 
 def sensor(request):
     if request.method == 'POST':
